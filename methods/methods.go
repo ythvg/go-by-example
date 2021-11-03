@@ -1,0 +1,29 @@
+package main
+
+import "fmt"
+
+type rect struct {
+	width, height int
+}
+
+func (r *rect) area() int {
+	*r = rect{2, 3}
+	return r.width * r.height
+}
+
+func (r rect) perim() int {
+	return 2*r.width + 2*r.height
+}
+
+func main() {
+	r := rect{10, 5}
+
+	fmt.Println("area: ", r.area())
+	fmt.Println("perim: ", r.perim())
+	fmt.Println(r)
+
+	rp := &r
+	fmt.Println("area: ", rp.area())
+	fmt.Println("area: ", rp.perim())
+
+}
