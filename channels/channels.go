@@ -6,15 +6,16 @@ import (
 )
 
 func main() {
-	messages := make(chan string)
+	messages := make(chan string, 1)
+	fmt.Println("main...")
 
 	go func() {
 		fmt.Println("goroutine...")
-		msg := <-messages
-		time.Sleep(time.Second)
-		fmt.Println(msg)
+		messages <- "ping"
+		fmt.Println("ping done....")
 	}()
 
-	messages <- "ping"
-	fmt.Println("main")
+	time.Sleep(time.Second)
+	msg := <-messages
+	fmt.Println(msg)
 }
